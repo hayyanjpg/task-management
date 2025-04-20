@@ -1,9 +1,36 @@
+// login_page.dart
+
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 
-class LoginPage extends StatelessWidget {
+class LoginPage extends StatefulWidget {
   const LoginPage({super.key});
+
+  @override
+  State<LoginPage> createState() => _LoginPageState();
+}
+
+class _LoginPageState extends State<LoginPage> {
+  final TextEditingController _emailController = TextEditingController();
+  final TextEditingController _passwordController = TextEditingController();
+  String _errorMessage = "";
+  bool _isPasswordVisible = false;
+
+  void _login() {
+    String email = _emailController.text;
+    String password = _passwordController.text;
+
+    // Validasi sederhana (GANTI DENGAN LOGIKA AUTENTIKASI ASLI)
+    if (email == 'user@example.com' && password == 'password') {
+      // Arahkan ke halaman profil setelah login berhasil
+      Navigator.pushReplacementNamed(context, '/profile');
+    } else {
+      setState(() {
+        _errorMessage = "Email atau Password salah!";
+      });
+    }
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -18,7 +45,7 @@ class LoginPage extends StatelessWidget {
               children: [
                 Center(
                   child: SvgPicture.asset(
-                    'assets/login_illustration.svg',
+                    'assets/login_illustration.svg', // Pastikan path ini benar
                     height: 200,
                   ),
                 ),
@@ -41,32 +68,60 @@ class LoginPage extends StatelessWidget {
                 ),
                 const SizedBox(height: 24),
                 TextField(
+                  controller: _emailController,
                   keyboardType: TextInputType.emailAddress,
                   decoration: InputDecoration(
                     labelText: 'Email',
                     prefixIcon: const Icon(Icons.email_outlined),
-                    border: OutlineInputBorder(
-                      borderRadius: BorderRadius.circular(12),
-                    ),
+                    // Menggunakan tema dari MaterialApp
+                    // border: OutlineInputBorder(
+                    //   borderRadius: BorderRadius.circular(12),
+                    // ),
                   ),
                 ),
                 const SizedBox(height: 16),
                 TextField(
-                  obscureText: true,
+                  controller: _passwordController,
+                  obscureText: !_isPasswordVisible,
                   decoration: InputDecoration(
                     labelText: 'Password',
                     prefixIcon: const Icon(Icons.lock_outline),
-                    border: OutlineInputBorder(
-                      borderRadius: BorderRadius.circular(12),
+                    suffixIcon: IconButton(
+                      icon: Icon(
+                        _isPasswordVisible
+                            ? Icons.visibility_off
+                            : Icons.visibility,
+                      ),
+                      onPressed: () {
+                        setState(() {
+                          _isPasswordVisible = !_isPasswordVisible;
+                        });
+                      },
                     ),
+                    // Menggunakan tema dari MaterialApp
+                    // border: OutlineInputBorder(
+                    //   borderRadius: BorderRadius.circular(12),
+                    // ),
                   ),
                 ),
                 const SizedBox(height: 16),
+                if (_errorMessage.isNotEmpty)
+                  Padding(
+                    padding: const EdgeInsets.only(bottom: 16),
+                    child: Text(
+                      _errorMessage,
+                      style: TextStyle( // Bisa juga pakai GoogleFonts
+                        color: Colors.redAccent,
+                        fontSize: 14,
+                        fontWeight: FontWeight.bold,
+                      ),
+                    ),
+                  ),
                 Align(
                   alignment: Alignment.centerRight,
                   child: TextButton(
                     onPressed: () {
-                      Navigator.pushNamed(context, '/forgot-password');
+                      // Navigator.pushNamed(context, '/forgot-password'); // Pastikan rute ini ada jika diaktifkan
                     },
                     child: Text(
                       "Forgot Password?",
@@ -83,22 +138,22 @@ class LoginPage extends StatelessWidget {
                   width: double.infinity,
                   height: 50,
                   child: ElevatedButton(
-                    style: ElevatedButton.styleFrom(
-                      backgroundColor: Colors.blueAccent,
-                      shape: RoundedRectangleBorder(
-                        borderRadius: BorderRadius.circular(12),
-                      ),
-                    ),
-                    onPressed: () {
-                      // Aksi login
-                    },
+                    // Style diambil dari tema MaterialApp
+                    // style: ElevatedButton.styleFrom(
+                    //   backgroundColor: Colors.blueAccent,
+                    //   shape: RoundedRectangleBorder(
+                    //     borderRadius: BorderRadius.circular(12),
+                    //   ),
+                    // ),
+                    onPressed: _login,
                     child: Text(
                       "Login",
-                      style: GoogleFonts.poppins(
-                        fontSize: 18,
-                        fontWeight: FontWeight.bold,
-                        color: Colors.white,
-                      ),
+                      // Style font diambil dari tema ElevatedButton
+                      // style: GoogleFonts.poppins(
+                      //   fontSize: 18,
+                      //   fontWeight: FontWeight.bold,
+                      //   color: Colors.white,
+                      // ),
                     ),
                   ),
                 ),
@@ -106,7 +161,7 @@ class LoginPage extends StatelessWidget {
                 Center(
                   child: TextButton(
                     onPressed: () {
-                      Navigator.pushNamed(context, '/register');
+                      // Navigator.pushNamed(context, '/register'); // Pastikan rute ini ada jika diaktifkan
                     },
                     child: Text(
                       "Don't have an account? Sign up",

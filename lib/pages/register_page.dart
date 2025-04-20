@@ -28,7 +28,7 @@ class RegisterPage extends StatelessWidget {
                 children: [
                   Center(
                     child: SvgPicture.asset(
-                      'assets/register_illustration.svg',
+                      'assets/register_illustration.svg', // Pastikan path ini benar
                       height: 200,
                     ),
                   ),
@@ -60,7 +60,7 @@ class RegisterPage extends StatelessWidget {
                       borderRadius: BorderRadius.circular(16),
                       boxShadow: [
                         BoxShadow(
-                          color: Colors.black.withOpacity(0.1),
+                          color: Colors.black.withAlpha((255 * 0.1).round()), // Sudah diperbaiki
                           blurRadius: 10,
                           offset: const Offset(0, 5),
                         ),
@@ -91,7 +91,14 @@ class RegisterPage extends StatelessWidget {
                               elevation: 5,
                             ),
                             onPressed: () {
-                              // Aksi register
+                              // TODO: Implementasi logika register
+                              // 1. Ambil nilai dari controller (perlu ubah jadi StatefulWidget dan tambah controller)
+                              // 2. Validasi input
+                              // 3. Panggil service/API untuk register
+                              // 4. Handle response (sukses/gagal)
+                              // --- HAPUS ATAU KOMENTARI PRINT ---
+                              // print("Register button pressed");
+                              // --- AKHIR PERUBAHAN ---
                             },
                             child: Text(
                               "Sign Up",
@@ -110,6 +117,7 @@ class RegisterPage extends StatelessWidget {
                         Center(
                           child: TextButton(
                             onPressed: () {
+                              // Kembali ke halaman login
                               Navigator.pop(context);
                             },
                             child: Text(
@@ -134,21 +142,31 @@ class RegisterPage extends StatelessWidget {
     );
   }
 
-  // Input Field Builder
+  // Input Field Builder (Helper Widget)
   Widget buildTextField(IconData icon, String label, {bool isPassword = false}) {
     return TextField(
       obscureText: isPassword,
       decoration: InputDecoration(
         labelText: label,
-        prefixIcon: Icon(icon, color: Colors.blueAccent),
+        labelStyle: GoogleFonts.poppins(color: Colors.grey[600]),
+        prefixIcon: Icon(icon, color: Colors.blueAccent.withAlpha(200)),
         border: OutlineInputBorder(
-          borderRadius: BorderRadius.circular(2),
+          borderRadius: BorderRadius.circular(8),
           borderSide: BorderSide.none,
         ),
+        enabledBorder: OutlineInputBorder(
+          borderRadius: BorderRadius.circular(8),
+          borderSide: BorderSide(color: Colors.grey.shade300),
+        ),
+        focusedBorder: OutlineInputBorder(
+          borderRadius: BorderRadius.circular(8),
+          borderSide: BorderSide(color: Colors.blueAccent, width: 1.5),
+        ),
         filled: true,
-        fillColor: Colors.grey[100],
+        fillColor: Colors.grey[50],
         contentPadding: const EdgeInsets.symmetric(vertical: 14, horizontal: 16),
       ),
+      style: GoogleFonts.poppins(),
     );
   }
 }
