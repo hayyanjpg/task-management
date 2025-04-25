@@ -32,6 +32,16 @@ class _LoginPageState extends State<LoginPage> {
     }
   }
 
+  // Fungsi untuk navigasi ke Forgot Password Page
+  void _navigateToForgotPassword() {
+    Navigator.pushNamed(context, '/forgot-password');
+  }
+
+  // Fungsi untuk navigasi ke Register Page
+  void _navigateToRegister() {
+    Navigator.pushNamed(context, '/register');
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -73,10 +83,6 @@ class _LoginPageState extends State<LoginPage> {
                   decoration: InputDecoration(
                     labelText: 'Email',
                     prefixIcon: const Icon(Icons.email_outlined),
-                    // Menggunakan tema dari MaterialApp
-                    // border: OutlineInputBorder(
-                    //   borderRadius: BorderRadius.circular(12),
-                    // ),
                   ),
                 ),
                 const SizedBox(height: 16),
@@ -98,10 +104,6 @@ class _LoginPageState extends State<LoginPage> {
                         });
                       },
                     ),
-                    // Menggunakan tema dari MaterialApp
-                    // border: OutlineInputBorder(
-                    //   borderRadius: BorderRadius.circular(12),
-                    // ),
                   ),
                 ),
                 const SizedBox(height: 16),
@@ -110,7 +112,7 @@ class _LoginPageState extends State<LoginPage> {
                     padding: const EdgeInsets.only(bottom: 16),
                     child: Text(
                       _errorMessage,
-                      style: TextStyle( // Bisa juga pakai GoogleFonts
+                      style: TextStyle(
                         color: Colors.redAccent,
                         fontSize: 14,
                         fontWeight: FontWeight.bold,
@@ -120,9 +122,7 @@ class _LoginPageState extends State<LoginPage> {
                 Align(
                   alignment: Alignment.centerRight,
                   child: TextButton(
-                    onPressed: () {
-                      // Navigator.pushNamed(context, '/forgot-password'); // Pastikan rute ini ada jika diaktifkan
-                    },
+                    onPressed: _navigateToForgotPassword, // Panggil fungsi navigasi
                     child: Text(
                       "Forgot Password?",
                       style: GoogleFonts.poppins(
@@ -138,31 +138,16 @@ class _LoginPageState extends State<LoginPage> {
                   width: double.infinity,
                   height: 50,
                   child: ElevatedButton(
-                    // Style diambil dari tema MaterialApp
-                    // style: ElevatedButton.styleFrom(
-                    //   backgroundColor: Colors.blueAccent,
-                    //   shape: RoundedRectangleBorder(
-                    //     borderRadius: BorderRadius.circular(12),
-                    //   ),
-                    // ),
                     onPressed: _login,
                     child: Text(
                       "Login",
-                      // Style font diambil dari tema ElevatedButton
-                      // style: GoogleFonts.poppins(
-                      //   fontSize: 18,
-                      //   fontWeight: FontWeight.bold,
-                      //   color: Colors.white,
-                      // ),
                     ),
                   ),
                 ),
                 const SizedBox(height: 16),
                 Center(
                   child: TextButton(
-                    onPressed: () {
-                      // Navigator.pushNamed(context, '/register'); // Pastikan rute ini ada jika diaktifkan
-                    },
+                    onPressed: _navigateToRegister, // Panggil fungsi navigasi
                     child: Text(
                       "Don't have an account? Sign up",
                       style: GoogleFonts.poppins(
