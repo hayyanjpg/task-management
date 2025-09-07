@@ -1,7 +1,13 @@
 
 Ingetin - Aplikasi Task Manager Sederhana
 Ingetin adalah aplikasi mobile sederhana yang berfungsi sebagai manajer tugas (Task Manager) untuk membantu Anda mengatur dan mengingat semua kegiatan harian. Dengan antarmuka yang bersih dan mudah digunakan, Ingetin memastikan tidak ada lagi tugas yang terlewat.
+
+
  ![WhatsApp Image 2025-09-07 at 20 27 52_41d44e01](https://github.com/user-attachments/assets/9fe5a473-83df-4cf5-9d3c-5d5ef1d06c3f)
+
+
+
+ 
 🌟 Fitur Utama
 ✨ Tambah Tugas Baru: Catat semua kegiatan yang perlu Anda selesaikan dengan mudah.
 
